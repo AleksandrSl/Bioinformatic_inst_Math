@@ -1,6 +1,5 @@
 from first_blood import timethis
 
-
 #########First Task
 def sum_up_to_n(n):
     if n == 0:
