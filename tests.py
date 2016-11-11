@@ -30,7 +30,7 @@ from random import shuffle
 # print(fib.fibonacci_recursive_v2(7))
 # print(fib.count)
 ##############################################
-large_l = [el for el in range(100000)]
+large_l = [el for el in range(10000)]
 shuffle(large_l)
 
 
@@ -78,29 +78,55 @@ class TestMergeSortDecrease(unit.TestCase):
             with self.subTest(l=l):
                 self.assertListEqual(sort.merge_sort(list(l), order='decrease'), main_l)
 
-class TestChoiceSort(unit.TestCase):
+class TestSelectionSort(unit.TestCase):
 
     # @timethis
     def test_simple(self):
         main_l = [1, 2, 3, 4, 5, 6]
         for l in itertools.permutations(main_l):
             with self.subTest(l=l):
-                self.assertListEqual(sort.choice_sort(list(l)), main_l)
+                self.assertListEqual(sort.selection_sort(list(l)), main_l)
 
     def test_empty(self):
-        self.assertListEqual(sort.choice_sort(list()), [])
+        self.assertListEqual(sort.selection_sort(list()), [])
 
     def test_repeating_el(self):
         main_l = [1, 2, 3, 3, 4, 5, 6, 6]
         for l in itertools.permutations(main_l):
             with self.subTest(l=l):
-                self.assertListEqual(sort.choice_sort(list(l)), main_l)
+                self.assertListEqual(sort.selection_sort(list(l)), main_l)
 
     @timethis
     def test_large_sample(self):
         global large_l
         print('Choice_sort')
-        sort.choice_sort(large_l)
+        # print(large_l)
+        large_l = sort.selection_sort(large_l)
+
+class TestSelectionSortv2(unit.TestCase):
+
+    # @timethis
+    def test_simple(self):
+        main_l = [1, 2, 3, 4, 5, 6]
+        for l in itertools.permutations(main_l):
+            with self.subTest(l=l):
+                self.assertListEqual(sort.selection_sort_v2(list(l)), main_l)
+
+    def test_empty(self):
+        self.assertListEqual(sort.selection_sort_v2(list()), [])
+
+    def test_repeating_el(self):
+        main_l = [1, 2, 3, 3, 4, 5, 6, 6]
+        for l in itertools.permutations(main_l):
+            with self.subTest(l=l):
+                self.assertListEqual(sort.selection_sort_v2(list(l)), main_l)
+
+    @timethis
+    def test_large_sample(self):
+        global large_l
+        print('Choice_sort_v2')
+        # print(large_l)
+        sort.selection_sort_v2(large_l)
 
 
 if __name__ == '__main__':
