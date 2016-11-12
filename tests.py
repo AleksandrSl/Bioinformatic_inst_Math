@@ -58,75 +58,75 @@ class TestMergeSortIncrease(unit.TestCase):
         print('Merge sort')
         sort.merge_sort(large_l)
 
-class TestMergeSortDecrease(unit.TestCase):
+# class TestMergeSortDecrease(unit.TestCase):
+#
+#     # @timethis
+#     def test_simple(self):
+#         main_l = [1, 2, 3, 4, 5, 6]
+#         main_l.sort(reverse=True)
+#         for l in itertools.permutations(main_l):
+#             with self.subTest(l=l):
+#                 self.assertListEqual(sort.merge_sort(list(l), order='decrease'), main_l)
+#
+#     def test_empty(self):
+#         self.assertListEqual(sort.merge_sort(list(), order='decrease'), [])
+#
+#     def test_repeating_el(self):
+#         main_l = [1, 2, 3, 3, 4, 5, 6, 6]
+#         main_l.sort(reverse=True)
+#         for l in itertools.permutations(main_l):
+#             with self.subTest(l=l):
+#                 self.assertListEqual(sort.merge_sort(list(l), order='decrease'), main_l)
 
-    # @timethis
-    def test_simple(self):
-        main_l = [1, 2, 3, 4, 5, 6]
-        main_l.sort(reverse=True)
-        for l in itertools.permutations(main_l):
-            with self.subTest(l=l):
-                self.assertListEqual(sort.merge_sort(list(l), order='decrease'), main_l)
+# class TestSelectionSort(unit.TestCase):
+#
+#     # @timethis
+#     def test_simple(self):
+#         main_l = [1, 2, 3, 4, 5, 6]
+#         for l in itertools.permutations(main_l):
+#             with self.subTest(l=l):
+#                 self.assertListEqual(sort.selection_sort(list(l)), main_l)
+#
+#     def test_empty(self):
+#         self.assertListEqual(sort.selection_sort(list()), [])
+#
+#     def test_repeating_el(self):
+#         main_l = [1, 2, 3, 3, 4, 5, 6, 6]
+#         for l in itertools.permutations(main_l):
+#             with self.subTest(l=l):
+#                 self.assertListEqual(sort.selection_sort(list(l)), main_l)
+#
+#     @timethis
+#     def test_large_sample(self):
+#         global large_l
+#         print('Choice_sort')
+#         # print(large_l)
+#         large_l = sort.selection_sort(large_l)
 
-    def test_empty(self):
-        self.assertListEqual(sort.merge_sort(list(), order='decrease'), [])
-
-    def test_repeating_el(self):
-        main_l = [1, 2, 3, 3, 4, 5, 6, 6]
-        main_l.sort(reverse=True)
-        for l in itertools.permutations(main_l):
-            with self.subTest(l=l):
-                self.assertListEqual(sort.merge_sort(list(l), order='decrease'), main_l)
-
-class TestSelectionSort(unit.TestCase):
-
-    # @timethis
-    def test_simple(self):
-        main_l = [1, 2, 3, 4, 5, 6]
-        for l in itertools.permutations(main_l):
-            with self.subTest(l=l):
-                self.assertListEqual(sort.selection_sort(list(l)), main_l)
-
-    def test_empty(self):
-        self.assertListEqual(sort.selection_sort(list()), [])
-
-    def test_repeating_el(self):
-        main_l = [1, 2, 3, 3, 4, 5, 6, 6]
-        for l in itertools.permutations(main_l):
-            with self.subTest(l=l):
-                self.assertListEqual(sort.selection_sort(list(l)), main_l)
-
-    @timethis
-    def test_large_sample(self):
-        global large_l
-        print('Choice_sort')
-        # print(large_l)
-        large_l = sort.selection_sort(large_l)
-
-class TestSelectionSortv2(unit.TestCase):
-
-    # @timethis
-    def test_simple(self):
-        main_l = [1, 2, 3, 4, 5, 6]
-        for l in itertools.permutations(main_l):
-            with self.subTest(l=l):
-                self.assertListEqual(sort.selection_sort_v2(list(l)), main_l)
-
-    def test_empty(self):
-        self.assertListEqual(sort.selection_sort_v2(list()), [])
-
-    def test_repeating_el(self):
-        main_l = [1, 2, 3, 3, 4, 5, 6, 6]
-        for l in itertools.permutations(main_l):
-            with self.subTest(l=l):
-                self.assertListEqual(sort.selection_sort_v2(list(l)), main_l)
-
-    @timethis
-    def test_large_sample(self):
-        global large_l
-        print('Choice_sort_v2')
-        # print(large_l)
-        sort.selection_sort_v2(large_l)
+# class TestSelectionSortv2(unit.TestCase):
+#
+#     # @timethis
+#     def test_simple(self):
+#         main_l = [1, 2, 3, 4, 5, 6]
+#         for l in itertools.permutations(main_l):
+#             with self.subTest(l=l):
+#                 self.assertListEqual(sort.selection_sort_v2(list(l)), main_l)
+#
+#     def test_empty(self):
+#         self.assertListEqual(sort.selection_sort_v2(list()), [])
+#
+#     def test_repeating_el(self):
+#         main_l = [1, 2, 3, 3, 4, 5, 6, 6]
+#         for l in itertools.permutations(main_l):
+#             with self.subTest(l=l):
+#                 self.assertListEqual(sort.selection_sort_v2(list(l)), main_l)
+#
+#     @timethis
+#     def test_large_sample(self):
+#         global large_l
+#         print('Choice_sort_v2')
+#         # print(large_l)
+#         sort.selection_sort_v2(large_l)
 
 
 if __name__ == '__main__':

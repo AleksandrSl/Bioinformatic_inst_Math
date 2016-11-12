@@ -1,5 +1,6 @@
 from functools import partial
-
+from first_blood import timethis
+from random import shuffle
 def merge(l1, l2, order):
     # print('l1, l2 is: {}, {}'.format(l1, l2))
     new_l = []
@@ -10,7 +11,7 @@ def merge(l1, l2, order):
         comp_func = int.__lt__
 
     while l1 and l2:
-        if comp_func(l1[0], l2[0]):
+        if comp_func(l1[0], l2[0]):  # pop(0) работает за O(n^2 * logn), но вообще не похоже на то
             new_l.append(l2.pop(0))
         else:
             new_l.append(l1.pop(0))
@@ -22,6 +23,30 @@ def merge(l1, l2, order):
     return new_l
 
 
+def merge_v2(l1, l2, order): # работает за logn*n
+    # print('l1, l2 is: {}, {}'.format(l1, l2))
+    new_l = []
+    i1 = 0
+    i2 = 0
+
+    if order == 'increase':     # не хорошо конечно, что это каждый раз вызывается
+        comp_func = int.__gt__  # и вообще в идеале независящим от типа надо делать
+    elif order == 'decrease':
+        comp_func = int.__lt__
+
+    while (i1 != len(l1)) and (i2 != len(l2)):
+        if comp_func(l1[i1], l2[i2]):
+            new_l.append(l2[i2])
+            i2 += 1
+        else:
+            new_l.append(l1[i1])
+            i1 += 1
+
+    new_l.extend(l1[i1:])
+    new_l.extend(l2[i2:])
+    return new_l
+
+
 # import pdb
 def merge_sort(l, order='increase'):
     # pdb.set_trace()
@@ -30,6 +55,14 @@ def merge_sort(l, order='increase'):
     m = len(l)//2
     # merge_sort_with_order = partial(merge_sort, order=order)
     return merge(merge_sort(l[:m], order), merge_sort(l[m:], order), order)
+
+def merge_sort_v2(l, order='increase'):
+    # pdb.set_trace()
+    if len(l) == 1 or len(l) == 0:
+        return l
+    m = len(l)//2
+    # merge_sort_with_order = partial(merge_sort, order=order)
+    return merge_v2(merge_sort(l[:m], order), merge_sort(l[m:], order), order)
 
 
 def min_with_pos(l):
@@ -88,3 +121,30 @@ def boyer_moore_majority(l):
 #         l[:ind].extend(l[ind+1:])
 #         print(l)
 #     return new_l
+@timethis
+def run_v1(l):
+    return merge_sort(l)
+
+@timethis
+def run_v2(l):
+    return merge_sort_v2(l)
+
+@timethis
+def run_sel_v1(l):
+    return selection_sort(l)
+
+@timethis
+def run_stand(l):
+    return sorted(l)
+
+
+large_l = list(range(10000))
+shuffle(large_l)
+print('shuffled')
+l1 = run_v1(large_l)
+l2 = run_v2(large_l)
+l4 = run_stand(large_l)
+l3 = run_sel_v1(large_l)
+assert l1 == list(range(10000))
+assert l1 == l2 == l3 == l4
+
