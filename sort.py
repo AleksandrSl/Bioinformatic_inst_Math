@@ -148,3 +148,17 @@ l3 = run_sel_v1(large_l)
 assert l1 == list(range(10000))
 assert l1 == l2 == l3 == l4
 
+def bubble_sort(l):
+    is_sorted = False
+    while not is_sorted:
+        is_sorted = True
+        for i in range(len(l) - 1):
+            if l[i] > l[i + 1]:
+                l[i + 1], l[i] = l[i], l[i + 1]
+                is_sorted = False
+    return l
+
+
+import math
+
+print(math.exp(1.61)/(1 + math.exp(1.61)))
