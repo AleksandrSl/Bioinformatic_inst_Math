@@ -52,6 +52,45 @@ class Graph:  # Сплошные костыли, но удалять верши�
                 output.append('{}-{}\n'.format(v, neighbour))
         return ''.join(output)
 
+class Graph_2:  # Сплошные костыли, но удалять вершины должен правильно, и выписывать ребра удобно. Вообще переделать надо(
+
+    __slots__ = ['vertex_dict', 'edges']
+
+    def __init__(self):
+        self.vertex_dict = defaultdict(list)
+        self.edges = 0
+
+    def add_edge(self, v1, v2):
+        self.vertex_dict[v1].append(v2)
+        self.vertex_dict[v2].append(v1)
+        self.edges += 1
+
+    def del_edge(self, v1, v2):
+        if v1 in self.vertex_dict:
+            if v2 in self.vertex_dict[v1]:
+                self.vertex_dict[v1].remove(v2)
+                self.vertex_dict[v2].remove(v1)
+                if self.vertex_dict[v1] == []:
+                    self.vertex_dict.pop(v1)
+                if self.vertex_dict[v2] == []:
+                    self.vertex_dict.pop(v2)
+                self.edges -= 1
+        else:
+            print("Edge doesn't exist")
+
+
+    def neighbours(self, v):
+        return self.vertex_dict[v]
+
+    def vertices_list(self):
+        return [v for v in self.vertices if self.vertices[v] != 0]
+
+    def size(self):
+        return '{} edges {} vertices'.format(self.edges, len(self.vertex_dict))
+
+    def __str__(self):
+        pass
+
 graph = Graph()
 graph.add_edge(1, 3)
 graph.add_edge(3, 2)
@@ -61,6 +100,16 @@ graph.add_edge(1, 5)
 print(graph.neighbours(1))
 print(graph.size())
 print(graph)
+
+graph = Graph_2()
+graph.add_edge(1, 3)
+graph.add_edge(3, 2)
+graph.add_edge(4, 5)
+graph.add_edge(1, 6)
+graph.add_edge(1, 5)
+print(graph.neighbours(1))
+print(graph.size())
+# print(graph)
 
 class Stack:
 
@@ -90,41 +139,62 @@ class Stack:
 class DoubleStack:
 
     def __init__(self, n):
-        self.max_items = n
-        self.items_1 = []
-        self.items_2 = []
+        self.items = ['_'] * n
+        self.first_head = 0
+        self.second_head = -1
 
     def is_full(self):
-        return len(self.items_1) + len(self.items_2) >= self.max_items
+        return self.first_head - self.second_head > len(self.items)
 
     def is_first_empty(self):
-        return self.items_1 == []
+        return self.first_head == 0
 
     def is_second_empty(self):
-        return self.items_2 == []
+        return self.second_head == -1
 
     def push_first(self, item):
         if not self.is_full():
-            self.items_1.append(item)
+            self.items[self.first_head] = item
+            self.first_head += 1
         else:
             print('Stack is full')
 
     def push_second(self, item):
         if not self.is_full():
-            self.items_2.append(item)
+            self.items[self.second_head] = item
+            self.second_head -= 1
         else:
             print('Stack is full')
 
     def pop_first(self):
         if self.is_first_empty():
             return None
-        return self.items_1.pop()
+        t = self.items[self.first_head - 1]
+        self.first_head  -= 1
+        self.items[self.first_head - 1] = 0
+        return t
 
     def pop_second(self):
         if self.is_second_empty():
             return None
-        return self.items_2.pop()
+        t = self.items[self.second_head + 1]
+        self.second_head += 1
+        self.items[self.second_head + 1] = 0
+        return t
 
+    def __str__(self):
+        return str(self.items)
+
+print("#####################_______DoubleStack_______#######################")
+ds = DoubleStack(10)
+ds.push_first(10)
+ds.push_second(100)
+for i in range(9):
+    ds.push_first(i)
+print(ds)
+print(ds.pop_first())
+print(ds.pop_first())
+print("#####################_______END_______#######################")
 
 def is_braces_right(braces_string):
     stack = Stack()
@@ -184,6 +254,11 @@ def magic_func_2(l, x): # Посмотрел в интернете
 
 assert magic_func([1,2,3,4], 5) == True
 assert magic_func([1,2,3,4], 100) == False
+assert magic_func([1,2], 2) == False
 
 assert magic_func_2([1,2,3,4], 5) == True
 assert magic_func_2([1,2,3,4], 100) == False
+
+
+# import inspect
+# print(inspect.findsource(bisect_right))
