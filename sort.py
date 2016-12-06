@@ -4,7 +4,7 @@ from random import shuffle
 def merge(l1, l2, order):
     # print('l1, l2 is: {}, {}'.format(l1, l2))
     new_l = []
-
+    # This takes most of the time
     if order == 'increase':     # не хорошо конечно, что это каждый раз вызывается
         comp_func = int.__gt__  # и вообще в идеале независящим от типа надо делать
     elif order == 'decrease':
@@ -34,7 +34,7 @@ def merge_v2(l1, l2, order): # работает за logn*n
     elif order == 'decrease':
         comp_func = int.__lt__
 
-    while (i1 != len(l1)) and (i2 != len(l2)):
+    while i1 != len(l1) and i2 != len(l2):
         if comp_func(l1[i1], l2[i2]):
             new_l.append(l2[i2])
             i2 += 1
@@ -138,15 +138,15 @@ def run_stand(l):
     return sorted(l)
 
 
-large_l = list(range(10000))
+large_l = list(range(100000))
 shuffle(large_l)
 print('shuffled')
 l1 = run_v1(large_l)
 l2 = run_v2(large_l)
 l4 = run_stand(large_l)
-l3 = run_sel_v1(large_l)
+#l3 = run_sel_v1(large_l)
 assert l1 == list(range(10000))
-assert l1 == l2 == l3 == l4
+#assert l1 == l2 == l3 == l4
 
 def bubble_sort(l):
     is_sorted = False
